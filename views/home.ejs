@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=0.60, minimum-scale=0.60, maximum-scale=1, user-scalable=yes"
+/>
+
+<nav>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<div class="centered-image-container">
+    <img class="mt-5 below-nav" src="/images/logo.png" alt="Logo Image" style="width: 180px; height: 180px;">
+</div>
+
+<div id="about" class="about-section">
+    <h2>About Me</h2>
+    <img src="/images/myimage.jpg" alt="My Image" class="below-aboutsection">
+    <p>
+        My name is Kiran Thapa, and I am a 25-year-old technology enthusiast from Nepal. I am passionate about technology and electrical engineering and have pursued a career that blends these fields. Currently, I’m in Hamburg, Germany, studying Information and Electrical Engineering.
+    </p>
+</div>
+
+<div id="education" class="education-section">
+    <h2>Education</h2>
+    <ol>
+        <li>Finished my grade twelve at <a href="https://satyawati.edu.np/">Shree Satyawati Higher Secondary School</a></li>
+        <li>On-the-job training in computer engineering for one year, achieving 85%.</li>
+        <li>Currently studying at <a href="https://www.haw-hamburg.de/en/">Hamburg University of Applied Sciences</a> in Information and Electrical Engineering.</li>
+    </ol>
+</div>
+
+<div class="col-md-5 fade show"><%- include('form') %></div>
+
+
+<%- include('partials/footer') %>

@@ -1,0 +1,47 @@
+<%- include('partials/header') %> 
+<meta name="viewport" content="width=device-width, initial-scale=0.60, minimum-scale=0.60, maximum-scale=1, user-scalable=yes">
+
+<div class="nojobcode text-center" style="max-width: 74%; margin: 0 auto; padding: 20px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+        <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.5 3.5 0 0 0 8 11.5a3.5 3.5 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5m4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5"/>
+      </svg>
+      <h2>Thank you for contacting <br><%= name %>!</h2>
+      <p>I will get back to you as soon as possible!</p>
+      <p><strong>You wrote:</strong> <%= message %></p>
+      <p><strong>Your Email:</strong> <%= email %></p>
+      <p><strong>Your Phone Number:</strong> <%= phoneNumber %></p>
+      <div class="admin-only-div text-center mt-3">
+        <a href="/" class="w-auto btn rounded-pill button1">Back to Homepage</a>
+      </div>
+</div>
+
+<script>
+    $(document).on('click', '.navbar-toggler', function () {
+      var targetNavbar = $($(this).data("target"));
+      targetNavbar.toggleClass("show");
+    });
+  
+    $(document).on('click', function (event) {
+      // Close navbar on window click
+      if (!$(event.target).closest('.navbar').length) {
+        $('.navbar-collapse.show').removeClass('show');
+      }
+    });
+  </script>
+  
+  <script>
+    $(document).on('click', '.linkfooterh5', function () {
+      var targetNavbar = $($(this).data("target"));
+      targetNavbar.toggleClass("show");
+    });
+  
+    $(document).on('click', function (event) {
+      // Close navbar on window click
+      if (!$(event.target).closest('.linkcontainer').length) {
+        $('.linklist-collapse.show').removeClass('show');
+      }
+    });
+  </script>
+
+<%- include('partials/footer') %>

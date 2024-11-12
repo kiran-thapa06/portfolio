@@ -1,0 +1,99 @@
+<%- include('partials/header') %>
+
+<div class="formcont ml-5">
+  <form action="/submit-contact-form" method="post">
+    <div class="form-heading">
+      <h2>Contact Me</h2>
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="inputName" id="inputName" placeholder=" " required />
+      <label for="inputName">Name</label>
+    </div>
+
+    <div class="form-group">
+      <input type="email" id="inputEmail" name="inputEmail" placeholder=" " required />
+      <label for="inputEmail">Email</label>
+    </div>
+
+    <input type="hidden" id="dialCode" name="dialCode" />
+
+    <div class="form-group telinput">
+      <input type="tel" id="inputPhoneNumber" name="inputPhoneNumber" placeholder="000 0000000" required />
+      <label for="inputPhoneNumber"></label>
+    </div>
+
+    <div class="form-group">
+      <textarea id="inputMessage" name="inputMessage" placeholder=" " required maxlength="1000"></textarea>
+      <label for="inputMessage">Your Message</label>
+    </div>
+
+    <div class="textconfirmation">
+      **By submitting this form you agree to be contacted by Kiran Thapa
+      <button type="submit" id="submitButton" class="btn btn-primary rounded-pill">Send</button>
+    </div>
+    
+    <div id="successAlert" class="alert alert-success" style="display: none;">
+      Email sent successfully!
+    </div>
+  </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/intlTelInput.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    console.log("DOM fully loaded and parsed.");
+
+    var inputPhoneNumber = document.querySelector("#inputPhoneNumber");
+    var dialCodeInput = document.querySelector("#dialCode");
+    var preferredCountries = ["np", "de", "us", "gb", "au", "ca", "ae", "sa", "qa", "bh", "kw", "om"];
+
+    console.log("Initializing intl-tel-input...");
+    var iti = window.intlTelInput(inputPhoneNumber, {
+      initialCountry: "np",
+      separateDialCode: true,
+      preferredCountries: preferredCountries,
+    });
+
+    if (!iti) {
+      console.error("intlTelInput initialization failed.");
+    } else {
+      console.log("intlTelInput initialized successfully.");
+    }
+
+    var defaultCountryData = iti.getSelectedCountryData();
+    console.log("Default Country Data:", defaultCountryData);
+    dialCodeInput.value = defaultCountryData.dialCode;
+
+    inputPhoneNumber.addEventListener('countrychange', function () {
+      var countryData = iti.getSelectedCountryData();
+      dialCodeInput.value = countryData.dialCode;
+      console.log("Country changed. New Country Data:", countryData);
+    });
+
+    // Get the selected country data
+    var countryData = iti.getSelectedCountryData();
+    console.log("Country Data on load:", countryData);
+
+    var maxLength = countryData.dialCode.length + 14;
+    console.log("Initial maxLength for phone input:", maxLength);
+
+    inputPhoneNumber.addEventListener("input", function () {
+      console.log("Phone input changed. Current value:", this.value);
+      this.value = this.value.replace(/\D/g, "");
+      if (this.value.length > maxLength) {
+        console.warn("Phone number exceeds maxLength, trimming input.");
+        this.value = this.value.slice(0, maxLength);
+      }
+    });
+
+    iti.countryChange = function () {
+      countryData = iti.getSelectedCountryData();
+      maxLength = countryData.dialCode.length + 14;
+      console.log("Country Data after countryChange:", countryData);
+      inputPhoneNumber.dispatchEvent(new Event("input"));
+    };
+  });
+</script>
+
+<%- include('partials/footer') %>
